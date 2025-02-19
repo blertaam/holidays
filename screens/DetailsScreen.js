@@ -2,66 +2,34 @@ import React from 'react';
 import { View, Text, StyleSheet, ScrollView } from 'react-native';
 
 const DetailsScreen = ({ route }) => {
-  const { holiday } = route.params; // Get holiday details from params
+  const { holiday } = route.params; // Get the holiday data passed from HomeScreen
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView contentContainerStyle={styles.container}>
       <Text style={styles.header}>{holiday.name}</Text>
-      <Text style={styles.holidayDate}>Date: {holiday.date}</Text>
-      <Text style={styles.detailsText}>More details about {holiday.name}...</Text>
-      <View style={styles.detailsCard}>
-        <Text style={styles.detailsTitle}>Holiday Details:</Text>
-        <Text style={styles.detailsDescription}>Here you can add specific information about {holiday.name}.</Text>
-      </View>
+      <Text style={styles.details}>Date: {holiday.date}</Text>
+      <Text style={styles.details}>Type: {holiday.type || "Not Available"}</Text>
+      <Text style={styles.details}>Public: {holiday.public ? "Yes" : "No"}</Text>
+      <Text style={styles.details}>Location: {holiday.location || "Not Available"}</Text>
     </ScrollView>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    flexGrow: 1,
+    backgroundColor: '#fff',
     padding: 20,
-    backgroundColor: '#f5f5f5',
+    paddingTop: 50,
   },
   header: {
-    fontSize: 32,
-    fontWeight: '700',
-    color: '#ff6347',
-    textAlign: 'center',
+    fontSize: 24,
+    fontWeight: 'bold',
     marginBottom: 20,
   },
-  holidayDate: {
+  details: {
     fontSize: 18,
-    color: '#666',
-    textAlign: 'center',
-    marginBottom: 15,
-  },
-  detailsText: {
-    fontSize: 16,
-    textAlign: 'center',
-    color: '#444',
-    marginTop: 10,
-  },
-  detailsCard: {
-    padding: 20,
-    backgroundColor: '#fff',
-    borderRadius: 10,
-    marginTop: 20,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.1,
-    shadowRadius: 10,
-    elevation: 5,
-  },
-  detailsTitle: {
-    fontSize: 18,
-    fontWeight: '600',
-    color: '#333',
-  },
-  detailsDescription: {
-    fontSize: 16,
-    color: '#444',
-    marginTop: 10,
+    marginBottom: 10,
   },
 });
 
