@@ -3,11 +3,24 @@ import {
   View, Text, FlatList, ActivityIndicator, 
   StyleSheet, TouchableOpacity, Dimensions 
 } from 'react-native';
+import { Ionicons } from '@expo/vector-icons'; // Import icons
 
 const API_KEY = 'd9d2d1b6-661f-4ae9-a8a9-e845a4da60fa';
 
 const { width } = Dimensions.get('window');
 const ITEM_WIDTH = width / 5.5; // Adjusted for 5 items per row
+
+// Function to assign icons based on holiday names
+const getHolidayIcon = (holidayName) => {
+  if (holidayName.includes('New Year')) return 'calendar';
+  if (holidayName.includes('Christmas')) return 'gift';
+  if (holidayName.includes('Independence')) return 'flag';
+  if (holidayName.includes('Thanksgiving')) return 'restaurant';
+  if (holidayName.includes('Halloween')) return 'skull';
+  if (holidayName.includes('Easter')) return 'egg';
+  if (holidayName.includes('Labor Day')) return 'briefcase';
+  return 'calendar-outline'; // Default icon
+};
 
 const HomeScreen = ({ navigation }) => {
   const [holidays, setHolidays] = useState([]);
@@ -28,7 +41,7 @@ const HomeScreen = ({ navigation }) => {
       ) : (
         <FlatList
           data={holidays}
-          keyExtractor={(item) => item.date}
+          keyExtractor={(item) => item.date + item.name}
           numColumns={5} // Display 5 items per row
           showsVerticalScrollIndicator={false} // Hides the scrollbar
           renderItem={({ item }) => (
@@ -37,6 +50,7 @@ const HomeScreen = ({ navigation }) => {
               style={styles.touchable}
             >
               <View style={styles.holidayCard}>
+                <Ionicons name={getHolidayIcon(item.name)} size={20} color="white" />
                 <Text style={styles.holidayName} numberOfLines={2}>{item.name}</Text>
                 <Text style={styles.holidayDate}>{item.date}</Text>
               </View>
@@ -77,6 +91,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     color: '#FFF',
     textAlign: 'center',
+    marginTop: 5,
   },
   holidayDate: {
     fontSize: 10,

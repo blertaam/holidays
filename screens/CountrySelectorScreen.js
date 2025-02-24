@@ -19,7 +19,7 @@ const CountrySelectorScreen = () => {
 
   return (
     <ImageBackground
-      source={{ uri: 'https://upload.wikimedia.org/wikipedia/commons/thumb/9/91/Winkel_triple_projection_SW.jpg/1920px-Winkel_triple_projection_SW.jpg' }} // Replace with your background image URL
+      source={{ uri: 'https://geology.com/world/world-map.gif' }} // Replace with your background image URL
       style={styles.background}
     >
       <View style={styles.container}>
